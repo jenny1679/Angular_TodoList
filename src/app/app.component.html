@@ -1,0 +1,32 @@
+<section class="todoapp">
+    <header class="header">
+        <h1>{{title}}</h1>
+        <!-- <input class="new-todo" (keyup)="add($event)" [placeholder]="placeholder" autofocus> -->
+        <!-- 【範本變數+案件事件過濾.enter】自訂變數 可以取到元素 (上方修改成下方範例) -->
+        <input class="new-todo" #todoInput (keyup.enter)="add(todoInput)" [placeholder]="placeholder" autofocus>
+    </header>
+
+    <section class="main" style="display: block;">
+        <input id="toggle-all" class="toggle-all" type="checkbox"
+        [checked]="toggleAllBtn" (click)="toggleAll()">
+        <label for="toggle-all">標示皆完成</label>
+        <ul class="todo-list">
+          <!-- 一開始的寫法 -->
+          <!-- <li data-id="1659859088014" [class]="{completed:check1,smallText:check1}">
+              <div class="view">
+                  <input class="toggle" type="checkbox" [checked]="check1" (click)="clickCheck1()">
+                  <label>111</label>
+                  <button class="destroy"> </button>
+              </div>
+          </li> -->
+          <li *ngFor="let item of todoDataList; let i = index" data-id="1659859089744" [class]="{completed:item.status,smallText:item.status}">
+              <div class="view">
+                  <input class="toggle" type="checkbox" [checked]="item.status" (click)="clickCheck(item)">
+                  <label>{{item.task}}</label>
+                  <button (click)="delete(i)" class="destroy"></button>
+              </div>
+          </li>
+      </ul>
+    </section>
+
+</section>

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "helloworld": {
+    "todo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/helloworld",
+            "outputPath": "dist/todo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,15 +28,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/todomvc-app-css/index.css"
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "lodash"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -75,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "helloworld:build:production"
+              "browserTarget": "todo:build:production"
             },
             "development": {
-              "browserTarget": "helloworld:build:development"
+              "browserTarget": "todo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "helloworld:build"
+            "browserTarget": "todo:build"
           }
         },
         "test": {

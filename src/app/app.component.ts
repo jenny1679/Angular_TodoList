@@ -1,33 +1,28 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Todo } from './@models/todo.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = '待辦事項';
   placeholder = '請輸入待辦事項';
-
   toggleAllBtn = false;
-  // check1 = false;
-  // check2 = false;
 
-  todoDataList:Todo[] = [
-    { status: false, task: '任務1' },
-    { status: false, task: '任務2' },
-    { status: true, task: '任務3' }
+  todoDataList: Todo[] = [
+    { status: false, task: '任務1', Editing: false },
+    { status: false, task: '任務2', Editing: false },
+    { status: true, task: '任務3', Editing: false }
   ];
 
   toggleAll() {
     this.toggleAllBtn = !this.toggleAllBtn;
-    // 一開始的寫法
-    // this.check1 = this.toggleAllBtn;
-    // this.check2 = this.toggleAllBtn;
     this.todoDataList.forEach(data => {
       data.status = this.toggleAllBtn;
-    })
+    });
   }
 
   clickCheck(item: Todo) {
@@ -35,32 +30,32 @@ export class AppComponent {
   }
 
   delete(index: number) {
-    this.todoDataList.splice(index, 1); //刪除一個
+    this.todoDataList.splice(index, 1);
   }
 
-  // add(event: KeyboardEvent) {
-  //   if (event.key === 'Enter') {
-  //     const value = (event.target as HTMLInputElement).value;
-  //     this.todoDataList.push({
-  //       status: false, task: value
-  //     });
-  //     (event.target as HTMLInputElement).value = '';
-  //   }
-  // }
-  // 【範本變數】自訂變數 可以取到元素(上方修改成下方範例)
-  // add(event: KeyboardEvent, input: HTMLInputElement) {
-  //   if (event.key === 'Enter') {
-  //     this.todoDataList.push({
-  //       status: false, task: input.value
-  //     });
-  //     input.value = '';
-  //   }
-  // }
-  // 【案件事件過濾】(上方修改成下方範例)
-  add(input: HTMLInputElement) {
-    this.todoDataList.push({
-      status: false, task: input.value
-    });
-    input.value = '';
+  // 方法A
+  add(value: string) {
+    const todo: Todo = {
+      status: false,
+      task: value,
+      Editing: false
+    }
+    this.todoDataList.push(todo);
   }
+  // 方法B
+  // add(value: string){
+  //   this.todoDataList.push(new TodoClass(value))
+  // }
+
+  edit(item: Todo) {
+    item.Editing = true;
+  }
+
+  update(item: Todo, value: string) {
+    item.task = value;
+    item.Editing = false;
+  }
+
 }
+
+
